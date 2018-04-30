@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+    <body>
+            <div id="forminscrption" >
+                <select id="civilite" name="civilite">
+                    <option value="Mme">Mme</option>
+                    <option value="M">M</option>
+                    <option value="Dr">Dr</option>
+                </select>
+                <input id="nom" name="nom" type="text"/>
+                <input id="prenom" name="prenom" type="text"/>
+                <input id="adresse" name="adresse" type="text"/>
+                <input id="ville" name="ville" type="text"/>
+                <input id="cp" name="cp" type="number"/>
+                <input id="tel" name="tel" type="number"/>
+                <input id="email" name="email" type="text"/>
+                <input id="datenaissance" name="datenaissance" type="text"/>
+                <input id="bouton-inscription" type="submit" value="OK"/>
+                <div id="message"></div>
+            </div>
+         <script>
+
+            function inscription() {
+                var civilite = $('#civilite').val();
+                var nom = $('#nom').val();
+                var prenom = $('#prenom').val();
+                var adresse = $('#adresse').val();
+                var ville = $('#ville').val();
+                var cp = $('#cp').val();
+                var tel = $('#tel').val();
+                var email = $('#email').val();
+                var datenaissance = $('#datenaissance').val();
+
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        action: 'inscriptionClient',
+                        civilite: civilite,
+                        nom: nom,
+                        prenom: prenom,
+                        adresse: adresse,
+                        ville: ville,
+                        cp: cp,
+                        tel: tel,
+                        email: email,
+                        datenaissance: datenaissance,
+                    },
+                    dataType: 'json'
+                }).done(function (data) {
+                    if(data.result == '1')
+                        window.location = "validationInscription.html";
+                    else
+                        $('#message').html('Echec de l\'inscription');
+                });
+            }
+
+            $(document).ready(function () {
+                // ajout d'un "handler" sur le clic du bouton de connexion
+                $('#bouton-inscription').on('click', function () {
+                    // affichage pour debugage dans la console javascript du navigateur
+                    console.log('Click sur le bouton "S\'inscrire"');
+                    // appel de la fonction connexion
+                    inscription();
+                });
+            });
+
+        </script>
+    </body>
+</html>
