@@ -76,6 +76,9 @@ h2{
     height: 85vh;
     padding: 3%;
     position: relative;
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
 }
 #imgProfil{
     display: inline-block;
