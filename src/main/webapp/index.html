@@ -10,29 +10,29 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-		 <link rel="stylesheet" href="css/bootstrap.min.css">
-		 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/ProactifCss.css" type="text/css"/>
-		 <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
         <div id="pinkRect">
-				<div id="innerPinkRect">
-					<h1>Proact'IF</h1>
-					<h2>Connexion Client</h2>
-					<form class="form-inline">
-						<div class="form-group mb-2" id="formconnexion">
-							<div id="champsconnexion">
-								<label class="inputLabel" for="champidclient">Numéro Client</label>
-								<input class="form-control" name="idclient" id="champidclient" type="number">
-							</div>
-							<button type="submit" id="bouton-connexion" class="btn btn-light">OK ></button>
-						</div>
-					</form>
-					<div id="message"></div>
-					<p>Entrez votre numéro de client ou <a href="inscriptionClient.html" > inscrivez-vous</a></p>
-				</div>
+            <div id="innerPinkRect">
+                <h1>Proact'IF</h1>
+                <h2>Connexion Client</h2>
+                <form class="form-inline">
+                    <div class="form-group mb-2" id="formconnexion">
+                    <div id="champsconnexion">
+                            <label class="inputLabel" for="champidclient">Numéro Client</label>
+                            <input class="form-control" name="idclient" id="champidclient" type="number">
+                        </div>
+                        <button type="submit" id="bouton-connexion" class="btn btn-light">OK ></button>
+                    </div>
+                </form>
+                <div id="message"></div>
+                <p>Entrez votre numéro de client ou <a href="inscriptionClient.html" > inscrivez-vous</a></p>
+            </div>
         </div>
         <script>
 
@@ -58,6 +58,7 @@ and open the template in the editor.
             }
 
             $(document).ready(function () {
+                document.body.style.backgroundColor = "white";
                 // ajout d'un "handler" sur le clic du bouton de connexion
                 $('#bouton-connexion').on('click', function () {
                     // affichage pour debugage dans la console javascript du navigateur

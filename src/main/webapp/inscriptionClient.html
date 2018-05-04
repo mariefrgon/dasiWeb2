@@ -6,29 +6,82 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Proact'IF</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/ProactifCss.css" type="text/css"/>
+        <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
-            <div id="forminscrption" >
-                <select id="civilite" name="civilite">
-                    <option value="Mme">Mme</option>
-                    <option value="M">M</option>
-                    <option value="Dr">Dr</option>
-                </select>
-                <input id="nom" name="nom" type="text"/>
-                <input id="prenom" name="prenom" type="text"/>
-                <input id="adresse" name="adresse" type="text"/>
-                <input id="ville" name="ville" type="text"/>
-                <input id="cp" name="cp" type="number"/>
-                <input id="tel" name="tel" type="number"/>
-                <input id="email" name="email" type="text"/>
-                <input id="datenaissance" name="datenaissance" type="text"/>
-                <input id="bouton-inscription" type="submit" value="OK"/>
+        <header>
+            <h1>Proact'IF</h1>
+        </header>
+        <div id="centerRect">
+            <div class="form-row">
+                <div class="form-group col-md-1">
+                    <img src="img/profile.png" alt="profile" id="imgProfil">
+                </div>
+            <form class="form-group col-md-11" id="forminscription">
+                <div class="form-row">
+                    <div class="form-group col-md-1">
+                        <label for="civilite">Civilité</label>
+                        <select id="civilite" class="form-control" name="civilite">
+                            <option value="Mme">Mme</option>
+                            <option value="M">M</option>
+                            <option value="Dr">Dr</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputNom">Nom</label>
+                        <input type="text" class="form-control" id="inputNom" placeholder="Nom">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputprenom">Prenom</label>
+                        <input type="text" class="form-control" id="inputprenom" placeholder="Prenom">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputDateNaissance">Date de Naissance</label>
+                        <input type="date" class="form-control" id="inputDateNaissance" placeholder="Date de Naissance">
+                    </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-9">
+                    <label for="inputAdresse">Adresse</label>
+                    <input type="text" class="form-control" id="inputAdresse" placeholder="Adresse">
+                </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="inputVille">Ville</label>
+                        <input type="text" class="form-control" id="inputVille">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputCP">Code Postal</label>
+                        <input type="text" class="form-control" id="inputCP">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="inputTel">Téléphone</label>
+                        <input type="tel" class="form-control" id="inputTel" placeholder="Téléphone">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputEmail">E-mail</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                </div>
+                <div id="boutonDiv">
+                    <button id="bouton-inscription-annuler" type="reset" class="btn btn-dark btn-lg">Annuler</button>
+                    <button id="bouton-inscription-valider" type="submit" class="btn btn-light btn-lg">Valider</button>
+                </div>
                 <div id="message"></div>
+            </form>
             </div>
+        </div>
          <script>
 
             function inscription() {
