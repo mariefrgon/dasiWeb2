@@ -12,7 +12,7 @@ body{
     background-color: #d581a1;
 }
 #pinkRect{
-    background-color: pink;
+    background-color: #d581a1;
     width: 30%;
     margin-right: auto;
     margin-left: auto;
@@ -66,10 +66,30 @@ h2{
 	margin-bottom: 5%;
 }
 
+#icon-weelchair{
+    position: absolute;
+    left: 20%;
+    top: 25%;
+    color: #b82929;
+}
 
+#icon-users{
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    color: #b82929;
+}
+#icon-users-valinscr{
+    display: block;
+    color: #b82929;
+}
+#icon-weelchair-valinscr{
+    margin-left: 8%;
+    color: #b82929;
+}
 /* INCRIPTION */
-#centerRect{
-    background-color: #c7c2c2;
+.centerRect{
+    background-color: white;
     width: 90%;
     margin-right: auto;
     margin-left: auto;
@@ -79,6 +99,9 @@ h2{
     border-width: 3px;
     border-color: black;
     border-style: solid;
+}
+#centerRect-valinscr{
+    text-align: center;
 }
 #imgProfil{
     display: inline-block;

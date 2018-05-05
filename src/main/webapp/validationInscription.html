@@ -14,14 +14,17 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/ProactifCss.css" type="text/css"/>
+        <link href="css/fontawesome-all.css" rel="stylesheet">
         <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
         <header>
             <h1>Proact'IF</h1>
         </header>
-        <div id="centerRect">
-            <div id="result"></div>
+        <div class="centerRect" id="centerRect-valinscr">
+            <i id="icon-users-valinscr" class="fas fa-users fa-4x"></i>
+            <i id="icon-weelchair-valinscr" class="fas fa-wheelchair fa-2x"></i>
+            <div id="result-valinscr"></div>
         </div>
         <script>
 
@@ -34,11 +37,14 @@ and open the template in the editor.
                     },
                     dataType: 'json'
                 }).done(function (data) {
-                    $('#result').empty();
-                    $('#result').html(data.result);
-                    /*for (var i = 0; i < personnes.length; i++) {
-                        ajouter(data.personnes[i]);
-                    }*/
+                    $('#result-valinscr').empty();
+                    if(data.result == 1)
+                        $('#result').html("Bienvenue, merci d'avoir rejoint Proact'IF")
+                            .html("Votre inscription est terminée, vous avez reçu un e-mail de confirmation contenant votre numéro client.")
+                            .html("Utilisez votre numéro client pour vous connecter à l'application.");
+                    else
+                        $('#result-valinscr').html("pb");
+                        
                 });
             });
 
