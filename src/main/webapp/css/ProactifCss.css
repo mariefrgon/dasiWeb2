@@ -134,8 +134,14 @@ h2{
 
 #last-interventions{
     border: 1px solid #000;
+    height: 100%;
 }
 #titre-listeInterventions{
     margin-left: 1%;
     width: -moz-fit-content;
+}
+.cadreIntervention{
+    border:1px solid #000;
+    height: 25%;
+    margin: 3%;
 }

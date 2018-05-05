@@ -22,12 +22,23 @@ and open the template in the editor.
         </header>
         <div class="centerRect form-row" id="centerRect">
             <div id="infoClient" class="form-group col-md-4">
-                <p>Bonjour</p>
-                <p>Adresse</p>
+                <h1 id="nomClient"></h1>
+                <br/>
+                <i>Adresse</i>
+                <p id="adresseClient"></p>
             </div>
             <div class="form-group col-md-8">
                 <fieldset id="last-interventions" >
                     <legend id="titre-listeInterventions">Dernières Interventions</legend>
+                    <div class="form-row cadreIntervention">
+                        
+                    </div>
+                    <div class="form-row cadreIntervention">
+                        
+                    </div>
+                    <div class="form-row cadreIntervention">
+                        
+                    </div>
                 </fieldset>
             </div>
         </div>
@@ -42,9 +53,9 @@ and open the template in the editor.
                     },
                     dataType: 'json'
                 }).done(function (data) {
-                    $('#client').empty();
                     var client = data.client;
-                    $('#client').html(client.nom);
+                    $('#nomClient').html("Bonjour " + client.nom + ",");
+                    $('#adresseClient').html(client.adresse);
                     /*for (var i = 0; i < personnes.length; i++) {
                         ajouter(data.personnes[i]);
                     }*/
