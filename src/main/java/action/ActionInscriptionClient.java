@@ -20,7 +20,7 @@ import services.Service;
  */
 class ActionInscriptionClient {
     public void execute(HttpServletRequest request){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
         Date d = null;
         try {
             d = sdf.parse(request.getParameter("datenaissance"));
@@ -35,7 +35,6 @@ class ActionInscriptionClient {
                 request.getParameter("adresse")+ " " + request.getParameter("cp") + " " + request.getParameter("ville"),
                 request.getParameter("tel"),
                 request.getParameter("email"));
-        System.out.println(Service.inscriptionClient(c));
         request.setAttribute("isRegistered", Service.inscriptionClient(c));
     }
 }

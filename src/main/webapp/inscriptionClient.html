@@ -21,7 +21,7 @@ and open the template in the editor.
         <header>
             <h1>Proact'IF</h1>
         </header>
-        <div class="centerRect">
+        <div id="centerRect" class="centerRect">
             <div class="form-row">
                 <div class="form-group col-md-1">
                     <img src="img/profile.png" alt="profile" id="imgProfil">
@@ -41,8 +41,8 @@ and open the template in the editor.
                         <input type="text" class="form-control" id="inputNom" placeholder="Nom">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="inputprenom">Prenom</label>
-                        <input type="text" class="form-control" id="inputprenom" placeholder="Prenom">
+                        <label for="inputPrenom">Prenom</label>
+                        <input type="text" class="form-control" id="inputPrenom" placeholder="Prenom">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputDateNaissance">Date de Naissance    <i class="far fa-calendar-alt fa-lg"></i></label>
@@ -88,14 +88,14 @@ and open the template in the editor.
 
             function inscription() {
                 var civilite = $('#civilite').val();
-                var nom = $('#nom').val();
-                var prenom = $('#prenom').val();
-                var adresse = $('#adresse').val();
-                var ville = $('#ville').val();
-                var cp = $('#cp').val();
-                var tel = $('#tel').val();
-                var email = $('#email').val();
-                var datenaissance = $('#datenaissance').val();
+                var nom = $('#inputNom').val();
+                var prenom = $('#inputPrenom').val();
+                var adresse = $('#inputAdresse').val();
+                var ville = $('#inputVille').val();
+                var cp = $('#inputCp').val();
+                var tel = $('#inputTel').val();
+                var email = $('#inputEmail').val();
+                var datenaissance = $('#inputDateNaissance').val();
 
                 $.ajax({
                     url: './ActionServlet',
@@ -114,17 +114,21 @@ and open the template in the editor.
                     },
                     dataType: 'json'
                 }).done(function (data) {
-                    if(data.result == '1')
-                        window.location = "validationInscription.html";
+                    alert('PB');
+                    console.log("BLALBLALFAL");
+                    if(data.result == "true")
+                        console.log("OK");
+    //window.location = "validationInscription.html";
                     else
-                        $('#message').html('Echec de l\'inscription');
+                        console.log("PAS OK");
+                        //$('#message').html('Echec de l\'inscription');
                 });
             }
 
             $(document).ready(function () {
                 document.getElementById('centerRect').style.backgroundColor = '#c7c2c2';
                 // ajout d'un "handler" sur le clic du bouton de connexion
-                $('#bouton-inscription').on('click', function () {
+                $('#bouton-inscription-valider').on('click', function () {
                     // affichage pour debugage dans la console javascript du navigateur
                     console.log('Click sur le bouton "S\'inscrire"');
                     // appel de la fonction connexion

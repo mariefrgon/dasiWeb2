@@ -35,6 +35,8 @@ public class VueValidationInscription {
             JsonObject jsonresult = new JsonObject();
             jsonresult.addProperty("result", request.getAttribute("isRegistered").toString());
             out.println(gson.toJson(jsonresult));
+            System.out.println("vue.VueValidationInscription.validationInscription()");
+            out.close();
         } catch (Exception ex) {
             Logger.getLogger(ActionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

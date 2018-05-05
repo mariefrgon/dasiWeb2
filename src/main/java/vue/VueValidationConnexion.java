@@ -22,11 +22,12 @@ import javax.servlet.http.HttpServletResponse;
 public class VueValidationConnexion {
      
     public void validationConnexion(HttpServletRequest request, HttpServletResponse response) {
-        try (PrintWriter out = response.getWriter()) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try{
+            //Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonObject jsonresult = new JsonObject();
             jsonresult.addProperty("result", request.getAttribute("isConnected").toString());
-            out.println(gson.toJson(jsonresult));
+            response.getWriter().println(/*gson.toJson*/(jsonresult));
+            response.getWriter().close();
         } catch (Exception ex) {
             Logger.getLogger(ActionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
