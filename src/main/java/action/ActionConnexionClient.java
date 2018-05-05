@@ -26,6 +26,5 @@ public class ActionConnexionClient {
         }
         else
              request.setAttribute("isConnected", 0); //false
-        System.out.println(request.getAttribute("isConnected"));
     }
 }

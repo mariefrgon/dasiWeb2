@@ -24,29 +24,19 @@ and open the template in the editor.
         <div class="centerRect" id="centerRect-valinscr">
             <i id="icon-users-valinscr" class="fas fa-users fa-4x"></i>
             <i id="icon-weelchair-valinscr" class="fas fa-wheelchair fa-2x"></i>
-            <div id="result-valinscr"></div>
+            <div id="result-valinscr">
+                <h1>Bienvenue, merci d'avoir rejoint Proact'IF</h1>
+                <p>Votre inscription est terminée, vous avez reçu un e-mail de confirmation contenant votre numéro client.</p>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <p id="p-larger">Utilisez votre numéro client pour vous connecter à l'application.</p>
+                <a class="btn btn-outline-dark btn-lg" href="index.html" role="button">Aller à l'écran de connexion</a>
+            </div>
         </div>
         <script>
 
-            $(document).ready(function () {
-                $.ajax({
-                    url: './ActionServlet',
-                    method: 'POST',
-                    data: {
-                        action: 'validationClient'
-                    },
-                    dataType: 'json'
-                }).done(function (data) {
-                    $('#result-valinscr').empty();
-                    if(data.result == 1)
-                        $('#result').html("Bienvenue, merci d'avoir rejoint Proact'IF")
-                            .html("Votre inscription est terminée, vous avez reçu un e-mail de confirmation contenant votre numéro client.")
-                            .html("Utilisez votre numéro client pour vous connecter à l'application.");
-                    else
-                        $('#result-valinscr').html("pb");
-                        
-                });
-            });
 
         </script>
     </body>

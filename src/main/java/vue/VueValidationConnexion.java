@@ -23,10 +23,9 @@ public class VueValidationConnexion {
      
     public void validationConnexion(HttpServletRequest request, HttpServletResponse response) {
         try{
-            //Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonObject jsonresult = new JsonObject();
             jsonresult.addProperty("result", request.getAttribute("isConnected").toString());
-            response.getWriter().println(/*gson.toJson*/(jsonresult));
+            response.getWriter().println((jsonresult));
             response.getWriter().close();
         } catch (Exception ex) {
             Logger.getLogger(ActionServlet.class.getName()).log(Level.SEVERE, null, ex);

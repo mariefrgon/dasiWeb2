@@ -26,7 +26,7 @@ and open the template in the editor.
                 <div class="form-group col-md-1">
                     <img src="img/profile.png" alt="profile" id="imgProfil">
                 </div>
-            <form class="form-group col-md-11" id="forminscription">
+            <div class="form-group col-md-11" id="forminscription">
                 <div class="form-row">
                     <div class="form-group col-md-1">
                         <label for="civilite">Civilité</label>
@@ -77,11 +77,11 @@ and open the template in the editor.
                 </div>
                 <div id="boutonDiv">
                     
-                    <button id="bouton-inscription-annuler" type="reset" class="btn btn-dark btn-lg"><i class="fas fa-times-circle"></i>   Annuler</button>                    
-                    <button id="bouton-inscription-valider" type="submit" class="btn btn-light btn-lg"><i class="far fa-check-circle"></i>   Valider</button>
+                    <button id="bouton-inscription-annuler" class="btn btn-dark btn-lg"><i class="fas fa-times-circle"></i>   Annuler</button>                    
+                    <button id="bouton-inscription-valider" class="btn btn-light btn-lg"><i class="far fa-check-circle"></i>   Valider</button>
                 </div>
                 <div id="message"></div>
-            </form>
+            </div>
             </div>
         </div>
          <script>
@@ -110,18 +110,14 @@ and open the template in the editor.
                         cp: cp,
                         tel: tel,
                         email: email,
-                        datenaissance: datenaissance,
+                        datenaissance: datenaissance
                     },
                     dataType: 'json'
                 }).done(function (data) {
-                    alert('PB');
-                    console.log("BLALBLALFAL");
                     if(data.result == "true")
-                        console.log("OK");
-    //window.location = "validationInscription.html";
+                        window.location = "validationInscription.html";
                     else
-                        console.log("PAS OK");
-                        //$('#message').html('Echec de l\'inscription');
+                        $('#message').html('Echec de l\'inscription');
                 });
             }
 

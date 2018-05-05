@@ -70,7 +70,7 @@ public class VueInformationsClient {
             container.add("client", jsonPersonne);
             container.add("historique", jsonHistorique);
             out.println(gson.toJson(container));
-
+            out.close();
         } catch (Exception ex) {
             Logger.getLogger(ActionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

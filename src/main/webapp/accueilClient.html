@@ -6,13 +6,31 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Proact'IF</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/ProactifCss.css" type="text/css"/>
+        <link href="css/fontawesome-all.css" rel="stylesheet">
+        <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div id="client">TODO write content</div>
+        <header>
+            <h1>Proact'IF</h1>
+        </header>
+        <div class="centerRect form-row" id="centerRect">
+            <div id="infoClient" class="form-group col-md-4">
+                <p>Bonjour</p>
+                <p>Adresse</p>
+            </div>
+            <div class="form-group col-md-8">
+                <fieldset id="last-interventions" >
+                    <legend id="titre-listeInterventions">Dernières Interventions</legend>
+                </fieldset>
+            </div>
+        </div>
         <script>
 
             $(document).ready(function () {

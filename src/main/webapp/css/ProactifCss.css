@@ -79,14 +79,6 @@ h2{
     top: 5%;
     color: #b82929;
 }
-#icon-users-valinscr{
-    display: block;
-    color: #b82929;
-}
-#icon-weelchair-valinscr{
-    margin-left: 8%;
-    color: #b82929;
-}
 /* INCRIPTION */
 .centerRect{
     background-color: white;
@@ -125,4 +117,25 @@ h2{
 }
 #boutonDiv>button{
     margin: 1%;
+}
+#p-larger{
+    font-size: larger;
+}
+#icon-users-valinscr{
+    display: block;
+    color: #b82929;
+}
+#icon-weelchair-valinscr{
+    margin-left: 8%;
+    color: #b82929;
+    margin-bottom: 5%;
+}
+/* ACCUEIL CLIENT */
+
+#last-interventions{
+    border: 1px solid #000;
+}
+#titre-listeInterventions{
+    margin-left: 1%;
+    width: -moz-fit-content;
 }
