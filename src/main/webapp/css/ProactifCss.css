@@ -133,15 +133,33 @@ h2{
 /* ACCUEIL CLIENT */
 
 #last-interventions{
-    border: 1px solid #000;
-    height: 100%;
+    border: 2px solid #000;
+    height: 90%;
 }
 #titre-listeInterventions{
     margin-left: 1%;
     width: -moz-fit-content;
 }
 .cadreIntervention{
-    border:1px solid #000;
+    border:2px solid #000;
     height: 25%;
     margin: 3%;
+}
+
+.icon-intervention{
+    text-align: center;
+    margin: auto;
+}
+.firstLine-intervention{
+    font-size: larger;
+    margin-bottom: 0;
+}
+.text-intervention{
+    margin: auto;
+}
+.bouton-accueilClient{
+    margin: 2%;
+}
+.icon-dans-bouton{
+    margin-right: 3%;
 }

@@ -11,6 +11,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -59,8 +60,21 @@ public class VueInformationsClient {
                 jsonIntervention.addProperty("EmployeNom", i.getEmploye().getNom());
                 jsonIntervention.addProperty("EmployePrenom", i.getEmploye().getPrenom());
                 jsonIntervention.addProperty("description", i.getDescription());
-                jsonIntervention.addProperty("dateDebut", i.getDateDebut().toString());
-                jsonIntervention.addProperty("dateFin", (i.getDateFin() == null ? "null" : i.getDateFin().toString()));
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                String formattedDate = formatter.format(i.getDateDebut());
+                jsonIntervention.addProperty("dateDebut", formattedDate);
+                formatter = new SimpleDateFormat("HH:mm");
+                String formattedHour = formatter.format(i.getDateDebut());
+                jsonIntervention.addProperty("heureDebut", formattedHour);
+                if(i.getDateFin() == null){
+                    jsonIntervention.addProperty("dateFin","null");
+                    jsonIntervention.addProperty("heureFin", "null");
+                }else{
+                    formattedDate = formatter.format(i.getDateFin());
+                    jsonIntervention.addProperty("dateFin", formattedDate);
+                    formattedHour = formatter.format(i.getDateFin());
+                    jsonIntervention.addProperty("heureFin", formattedHour);
+                }
                 jsonIntervention.addProperty("probleme", i.isProbleme());
                 jsonIntervention.addProperty("commentaireFin", i.getCommentaireFin());
                 jsonHistorique.add(jsonIntervention);

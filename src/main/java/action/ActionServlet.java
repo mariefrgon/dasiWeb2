@@ -68,6 +68,7 @@ public class ActionServlet extends HttpServlet {
             VVI.validationInscription(request, response);
         }else{
             if(session.getAttribute("client") == null){
+                System.out.println("VOUS NETES PAS CONNECTE");
                 //TODO
             }else if(action.equals("informationsClient")){
                 VueInformationsClient VIC = new VueInformationsClient();

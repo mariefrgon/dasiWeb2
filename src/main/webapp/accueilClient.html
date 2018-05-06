@@ -31,15 +31,36 @@ and open the template in the editor.
                 <fieldset id="last-interventions" >
                     <legend id="titre-listeInterventions">Dernières Interventions</legend>
                     <div class="form-row cadreIntervention">
+                        <div id="icon-intervention-1" class="col-md-2 icon-intervention">
+                            
+                        </div>
+                        <div id="text-intervention-1" class="col-md-10 text-intervention">
+                            <p class="firstLine-intervention"></p>
+                            <i></i>
+                        </div>
+                    </div>
+                    <div class="form-row cadreIntervention">
+                        <div id="icon-intervention-2" class="col-md-2 icon-intervention">
+                            
+                        </div>
+                        <div id="text-intervention-2" class="col-md-10 text-intervention">
+                            <p class="firstLine-intervention"></p>
+                            <i></i>
+                        </div>
                         
                     </div>
                     <div class="form-row cadreIntervention">
-                        
-                    </div>
-                    <div class="form-row cadreIntervention">
-                        
+                        <div id="icon-intervention-3" class="col-md-2 icon-intervention">
+                            
+                        </div>
+                        <div id="text-intervention-3" class="col-md-10 text-intervention">
+                            <p class="firstLine-intervention"></p>
+                            <i></i>
+                        </div>
                     </div>
                 </fieldset>
+                <a class="btn btn-warning btn-lg bouton-accueilClient" href="index.html" role="button"><i class="fas fa-clock icon-dans-bouton"></i>Visionner l'historique des Interventions</a>
+                <a class="btn btn-success btn-lg bouton-accueilClient" href="index.html" role="button"><i class="fas fa-plus-circle icon-dans-bouton"></i>Nouvelle intervention</a>
             </div>
         </div>
         <script>
@@ -56,9 +77,26 @@ and open the template in the editor.
                     var client = data.client;
                     $('#nomClient').html("Bonjour " + client.nom + ",");
                     $('#adresseClient').html(client.adresse);
-                    /*for (var i = 0; i < personnes.length; i++) {
-                        ajouter(data.personnes[i]);
-                    }*/
+                    var cpt = 0;
+                    for(intervention in data.historique)
+                    {
+                        cpt++;
+                        if(data.historique[intervention].Type == "Livraison"){                            
+                            document.getElementById('icon-intervention-'+cpt).innerHTML = '<i class="fas fa-paper-plane fa-4x "></i>';
+                            $('#text-intervention-'+cpt+' > p').html('Livraison, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            $('#text-intervention-'+cpt+' > i').html('exécutée par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
+                        }
+                        else if(data.historique[intervention].Type == "Incident"){                            
+                            document.getElementById('icon-intervention-'+cpt).innerHTML = '<i class="fas fa-exclamation-triangle fa-4x "></i>';
+                            $('#text-intervention-'+cpt+' > p').html('Incident, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            $('#text-intervention-'+cpt+' > i').html('exécuté par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
+                        }
+                        else if(data.historique[intervention].Type == "Animal"){                            
+                            document.getElementById('icon-intervention-'+cpt).innerHTML = '<i class="fas fa-paw fa-4x"></i>';
+                            $('#text-intervention-'+cpt+' > p').html('Animal, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            $('#text-intervention-'+cpt+' > i').html('exécuté par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
+                        }
+                    }
                 });
             });
 
