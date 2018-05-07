@@ -70,7 +70,8 @@ public class ActionServlet extends HttpServlet {
             if(session.getAttribute("client") == null){
                 System.out.println("VOUS NETES PAS CONNECTE");
                 //TODO
-            }else if(action.equals("informationsClient")){
+            }else if(action.equals("informationsClient") || action.equals("historiqueClient")){
+                System.out.println(session.getAttribute("client"));
                 VueInformationsClient VIC = new VueInformationsClient();
                 VIC.informationsClient(request, response);
             }

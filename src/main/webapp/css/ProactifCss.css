@@ -163,3 +163,35 @@ h2{
 .icon-dans-bouton{
     margin-right: 3%;
 }
+
+/* HISTORIQUE CLIENT*/
+.rectHistorique{
+    display: block;
+}
+.cadreHistoriqueIntervention{
+    width: 100%;
+    height: -moz-fit-content;
+}
+#scrollArea{
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.iSecondLine{
+    margin-bottom: 1%;
+    display: block;
+}
+.div-com,.div-des{
+    margin: 1%;
+}
+.itext{
+    display: block;
+    margin-bottom: 1%;
+    word-wrap: break-word;
+}
+.bouton-retour{
+    margin: 1%;
+    float:right;
+}

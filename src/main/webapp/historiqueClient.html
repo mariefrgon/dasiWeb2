@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Proact'IF</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/ProactifCss.css" type="text/css"/>
+        <link href="css/fontawesome-all.css" rel="stylesheet">
+        <script src="js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Proact'IF</h1>
+        </header>
+        <div class="centerRect form-row rectHistorique" id="centerRect">
+            <div class="form-row" id="scrollArea">
+
+            </div>
+            <a class="btn btn-secondary bouton-retour" href="accueilClient.html" role="button"><i class="fas fa-reply icon-dans-bouton"></i>Retour</a>
+        </div>
+        
+        <script>
+
+            $(document).ready(function () {
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        action: 'historiqueClient'
+                    },
+                    dataType: 'json'
+                }).done(function (data) {
+                    for(intervention in data.historique)
+                    {
+                        var divFormRow = $('<div />').attr('class','form- row cadreIntervention cadreHistoriqueIntervention');
+                        var divIcon = $('<div />').attr('class','col-md-1 icon-intervention');
+                        var divText = $('<div />').attr('class','col-md-11 text-intervention');
+                        var pFirstLine = $('<p />').attr('class','firstLine-intervention');
+                        var iSecondLine = $('<i />').attr('class','iSecondLine');
+                        var divTextFormRow = $('<div />').attr('class','form-row');
+                        var pTitreDescription = $('<p />');
+                        var divDescription = $('<div />').attr('class','col-md-5 div-des');
+                        pTitreDescription.html('Description');
+                        var pTitreCommentaire = $('<p />');
+                        var divCommentaire = $('<div />').attr('class','col-md-5 div-com');
+                        pTitreCommentaire.html('Commentaire');
+                        var pCommentaire = $('<i />').attr('class','itext');
+                        var pDescription = $('<i />').attr('class','itext');
+                        
+                        if(data.historique[intervention].Type == "Livraison"){
+                            var icon = $('<i />').attr('class','fas fa-paper-plane fa-4x');
+                            pFirstLine.html('Livraison, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            var iSecondLineVal = 'exécutée par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0];
+                            var entreprise = $('<p />').html('Entreprise : ' + data.historique[intervention].entreprise);
+                            var objet = $('<p />').html('Objet : ' + data.historique[intervention].objet);
+                        }
+                        else if(data.historique[intervention].Type == "Incident"){  
+                            var icon = $('<i />').attr('class','fas fa-exclamation-triangle fa-4x');
+                            pFirstLine.html('Livraison, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            var iSecondLineVal = 'exécuté par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0];               
+                        }
+                        else if(data.historique[intervention].Type == "Animal"){
+                            var icon = $('<i />').attr('class','fas fa-paw fa-4x');
+                            pFirstLine.html('Livraison, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            var iSecondLineVal = 'exécuté par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0];                                             
+                            var animal = $('<p />').html('Animal : ' + data.historique[intervention].animal);
+                        }
+                        divIcon.append(icon);
+                        pDescription.html(data.historique[intervention].description);
+                        pCommentaire.html(data.historique[intervention].commentaireFin);
+                        divCommentaire.append(pTitreCommentaire,pCommentaire);
+                        divDescription.append(pTitreDescription,pDescription);
+                        divTextFormRow.append(divDescription,divCommentaire);
+                        if(data.historique[intervention].probleme == 1){
+                            iSecondLine.html(iSecondLineVal + ' / un problème a été rencontré');
+                            iSecondLine.css('color','red');
+                        }else{
+                            iSecondLine.html(iSecondLineVal + ' / aucun problème signalé');
+                            iSecondLine.css('color','green');
+                        }
+                        if(data.historique[intervention].Type == "Animal"){
+                            divText.append(pFirstLine,iSecondLine,animal,divTextFormRow);
+                        }else if(data.historique[intervention].Type == "Livraison"){
+                            divText.append(pFirstLine,iSecondLine,entreprise,objet,divTextFormRow);
+                        }
+                        else
+                            divText.append(pFirstLine,iSecondLine,divTextFormRow);
+                        divFormRow.append(divIcon,divText);  
+                        $('#scrollArea').append(divFormRow);
+                    }
+                });
+            });
+
+        </script>
+    </body>
+</html>
