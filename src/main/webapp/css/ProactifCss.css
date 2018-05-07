@@ -27,9 +27,9 @@ body{
 
 h1{
     font-size: 36px;
-	font-family: Verdana;
-	font-weight: bold;
-	margin-top: 0;
+    font-family: Verdana;
+    font-weight: bold;
+    margin-top: 0;
 }
 header>h1{
     text-align: right;
@@ -38,32 +38,32 @@ header>h1{
 }
 h2{
     font-size: medium;
-	margin-top: 0;
-	margin-bottom: 10%;
+    margin-top: 0;
+    margin-bottom: 10%;
 }
 
 #formconnexion{
-	width: -moz-fit-content;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: left;
-	margin-bottom: 5%;
+    width: -moz-fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    margin-bottom: 5%;
 }
 
 #bouton-connexion{
-	margin-top: 3vh;
+    margin-top: 3vh;
 }
 
 #champsconnexion{
-	margin-right: 1vh;
+    margin-right: 1vh;
 }
 
 .inputLabel{
-	display: block !important;
+    display: block !important;
 }
 
 #message{
-	margin-bottom: 5%;
+    margin-bottom: 5%;
 }
 
 #icon-weelchair{
@@ -106,9 +106,6 @@ h2{
 }
 #forminscription>.form-row{
     margin-bottom: 2%;
-}
-#civilite{
-    padding: 10%;
 }
 
 #boutonDiv{
@@ -194,4 +191,30 @@ h2{
 .bouton-retour{
     margin: 1%;
     float:right;
+}
+
+/* CHOIX INTERVENTION */
+#div-selection{
+    margin-left: auto;
+    margin-right: auto;
+    width: -moz-fit-content;
+    margin-top: 5%;
+}
+.div-center-content{
+    text-align: center;
+    margin-top: 10%;
+}
+.div-choix{
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    width: 30vh;
+    height: 30vh;
+    padding: 10%;
+    color: black;
+    background-color: rgb(199, 194, 194);
+}
+.p-choix{
+    margin-top: 10%;
+    font-size: large;
 }
