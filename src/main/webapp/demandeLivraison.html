@@ -21,59 +21,64 @@ and open the template in the editor.
             <h1>Proact'IF</h1>
         </header>
         <div class="centerRect form-row rectHistorique" id="centerRect">
-            <div class="form-row" id="scrollArea">
-
+            <h1 class="text-center"><i class="fas fa-paper-plane fa-2x icon-dans-bouton"></i>Nouvelle demande de Livraison</h1>
+            <div class="form-group demandeIntervention" >
+                <div class="form-row col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="inputLivraisonObjet">Objet</label>
+                        <input type="text" class="form-control" id="inputLivraisonObjet">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputLivraisonEntreprise">Entreprise</label>
+                        <input type="text" class="form-control" id="inputLivraisonEntreprise">
+                    </div>
+                </div>
+                <div class="form-group col-md-12 textareaDemande">
+                    <label for="inputLivraisonDescription">Entrez une description pour votre demande d'intervention</label>
+                    <textarea class="form-control" id="inputLivraisonDescription"></textarea>
+                </div>
+                <a class="btn btn-success bouton-basDroite" id="envoiDemandeLivraison" role="button"><i class="fas fa-check icon-dans-bouton"></i>Envoyer la demande</a>
+                <a class="btn btn-secondary bouton-basDroite" href="accueilClient.html" role="button"><i class="fas fa-ban icon-dans-bouton"></i>Annuler</a>
             </div>
-            <a class="btn btn-secondary bouton-basDroite" href="accueilClient.html" role="button"><i class="fas fa-reply icon-dans-bouton"></i>Retour</a>
         </div>
         
         <script>
 
-           /* function inscription() {
-                var civilite = $('#civilite').val();
-                var nom = $('#inputNom').val();
-                var prenom = $('#inputPrenom').val();
-                var adresse = $('#inputAdresse').val();
-                var ville = $('#inputVille').val();
-                var cp = $('#inputCp').val();
-                var tel = $('#inputTel').val();
-                var email = $('#inputEmail').val();
-                var datenaissance = $('#inputDateNaissance').val();
+            function demandeLivraison() {
+                var objet = $('#inputLivraisonObjet').val();
+                var entreprise = $('#inputLivraisonEntreprise').val();
+                var description = $('#inputLivraisonDescription').val();
 
                 $.ajax({
                     url: './ActionServlet',
                     method: 'POST',
                     data: {
-                        action: 'inscriptionClient',
-                        civilite: civilite,
-                        nom: nom,
-                        prenom: prenom,
-                        adresse: adresse,
-                        ville: ville,
-                        cp: cp,
-                        tel: tel,
-                        email: email,
-                        datenaissance: datenaissance
+                        action: 'demandeLivraison',
+                        objet: objet,
+                        entreprise: entreprise,
+                        description: description
                     },
                     dataType: 'json'
                 }).done(function (data) {
+                    if(data.pbConnexion == "true"){
+                        window.location = "problemeConnexion.html";
+                    }
                     if(data.result == "true")
-                        window.location = "validationInscription.html";
+                        window.location = "validationDemande.html";
                     else
-                        $('#message').html('Echec de l\'inscription');
+                        window.location = "refutDemande.html";
                 });
             }
 
             $(document).ready(function () {
-                document.getElementById('centerRect').style.backgroundColor = '#c7c2c2';
                 // ajout d'un "handler" sur le clic du bouton de connexion
-                $('#bouton-inscription-valider').on('click', function () {
+                $('#envoiDemandeLivraison').on('click', function () {
                     // affichage pour debugage dans la console javascript du navigateur
                     console.log('Click sur le bouton "S\'inscrire"');
                     // appel de la fonction connexion
-                    inscription();
+                    demandeLivraison();
                 });
-            });*/
+            });
 
         </script>
     </body>

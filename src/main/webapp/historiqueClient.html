@@ -38,6 +38,9 @@ and open the template in the editor.
                     },
                     dataType: 'json'
                 }).done(function (data) {
+                    if(data.pbConnexion == "true"){
+                        window.location = "problemeConnexion.html";
+                    }
                     for(intervention in data.historique)
                     {
                         var divFormRow = $('<div />').attr('class','form- row cadreIntervention cadreHistoriqueIntervention');

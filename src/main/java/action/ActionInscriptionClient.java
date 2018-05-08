@@ -5,6 +5,7 @@
  */
 package action;
 
+import fr.insalyon.dasi.proactifb3328.util.GeoTest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +28,12 @@ class ActionInscriptionClient {
         } catch (ParseException ex) {
             Logger.getLogger(ActionInscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        if(GeoTest.getLatLng((request.getParameter("adresse")+ " " + request.getParameter("cp") + " " + request.getParameter("ville"))) == null){
+            System.out.println("ADRESSE INEXISTANTE !!!!!!!!!!!!!!!");
+        }
+        
+        
         Client c = new Client(
                 request.getParameter("civilite"), 
                 request.getParameter("prenom"),

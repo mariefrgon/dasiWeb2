@@ -7,8 +7,8 @@ package action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import modele.Animal;
 import modele.Client;
+import modele.Incident;
 import modele.Intervention;
 import services.Service;
 
@@ -16,11 +16,11 @@ import services.Service;
  *
  * @author Emilie Borghino
  */
-class ActionDemandeAnimal {
+class ActionDemandeIncident {
 
     void execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        Intervention intervention = new Animal(request.getParameter("type"), (Client) session.getAttribute("client"), request.getParameter("description"));
+        Intervention intervention = new Incident((Client) session.getAttribute("client"), request.getParameter("description"));
         request.setAttribute("isSend", Service.envoyerIntervention(intervention));
     }
     

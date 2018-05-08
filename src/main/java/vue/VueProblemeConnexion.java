@@ -19,18 +19,17 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Emilie Borghino
  */
-public class VueValidationDemande {
+public class VueProblemeConnexion {
 
-    public void validationDemande(HttpServletRequest request, HttpServletResponse response) {
+    public void problemeConnexion(HttpServletRequest request, HttpServletResponse response) {
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JsonObject jsonresult = new JsonObject();
-            jsonresult.addProperty("result", request.getAttribute("isSend").toString());
-            jsonresult.addProperty("pbConnexion", "false");
+            jsonresult.addProperty("pbConnexion", "true");
             out.println(gson.toJson(jsonresult));
             out.close();
         } catch (Exception ex) {
-            Logger.getLogger(ActionServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ActionServlet.class.getName()).log(Level.ALL.SEVERE, null, ex);
         }
     }
     

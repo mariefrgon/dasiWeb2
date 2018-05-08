@@ -46,41 +46,6 @@ and open the template in the editor.
         </div>
         <script>
 
-            /*$(document).ready(function () {
-                $.ajax({
-                    url: './ActionServlet',
-                    method: 'POST',
-                    data: {
-                        action: 'informationsClient'
-                    },
-                    dataType: 'json'
-                }).done(function (data) {
-                    var client = data.client;
-                    $('#nomClient').html("Bonjour " + client.nom + ",");
-                    $('#adresseClient').html(client.adresse);
-                    var cpt = 0;
-                    for(intervention in data.historique)
-                    {
-                        cpt++;
-                        if(data.historique[intervention].Type == "Livraison"){                            
-                            document.getElementById('icon-intervention-'+cpt).innerHTML = '<i class="fas fa-paper-plane fa-4x "></i>';
-                            $('#text-intervention-'+cpt+' > p').html('Livraison, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
-                            $('#text-intervention-'+cpt+' > i').html('exécutée par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
-                        }
-                        else if(data.historique[intervention].Type == "Incident"){                            
-                            document.getElementById('icon-intervention-'+cpt).innerHTML = '<i class="fas fa-exclamation-triangle fa-4x "></i>';
-                            $('#text-intervention-'+cpt+' > p').html('Incident, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
-                            $('#text-intervention-'+cpt+' > i').html('exécuté par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
-                        }
-                        else if(data.historique[intervention].Type == "Animal"){                            
-                            document.getElementById('icon-intervention-'+cpt).innerHTML = '<i class="fas fa-paw fa-4x"></i>';
-                            $('#text-intervention-'+cpt+' > p').html('Animal, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
-                            $('#text-intervention-'+cpt+' > i').html('exécuté par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
-                        }
-                    }
-                });
-            });*/
-
         </script>
     </body>
 </html>

@@ -25,6 +25,7 @@ public class VueValidationConnexion {
         try{
             JsonObject jsonresult = new JsonObject();
             jsonresult.addProperty("result", request.getAttribute("isConnected").toString());
+            jsonresult.addProperty("pbConnexion", "false");
             response.getWriter().println((jsonresult));
             response.getWriter().close();
         } catch (Exception ex) {

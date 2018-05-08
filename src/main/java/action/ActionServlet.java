@@ -34,6 +34,7 @@ import vue.VueInformationsClient;
 import vue.VueValidationConnexion;
 import vue.VueValidationInscription;
 import vue.VueValidationDemande;
+import vue.VueProblemeConnexion;
 
 /**
  *
@@ -71,7 +72,8 @@ public class ActionServlet extends HttpServlet {
         }else{
             if(session.getAttribute("client") == null){
                 System.out.println("VOUS NETES PAS CONNECTE");
-                //TODO
+                VueProblemeConnexion VPC = new VueProblemeConnexion();
+                VPC.problemeConnexion(request, response);
             }else if(action.equals("informationsClient") || action.equals("historiqueClient")){
                 System.out.println(session.getAttribute("client"));
                 VueInformationsClient VIC = new VueInformationsClient();
@@ -81,6 +83,16 @@ public class ActionServlet extends HttpServlet {
                 ADA.execute(request);
                 VueValidationDemande VVD = new VueValidationDemande();
                 VVD.validationDemande(request, response);
+            }else if(action.equals("demandeIncident")){
+                ActionDemandeIncident ADI = new ActionDemandeIncident();
+                ADI.execute(request);
+                VueValidationDemande VVD = new VueValidationDemande();
+                VVD.validationDemande(request, response);
+            }else if(action.equals("demandeLivraison")){
+                ActionDemandeLivraison ADI = new ActionDemandeLivraison();
+                ADI.execute(request);
+                VueValidationDemande VVD = new VueValidationDemande();
+               VVD.validationDemande(request, response);
             }
         }
               

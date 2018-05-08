@@ -52,7 +52,11 @@ and open the template in the editor.
                     },
                     dataType: 'json'
                 }).done(function (data) {
-                    if(data.result == "1")
+                    if(data.pbConnexion == "true"){
+                        window.location = "problemeConnexion.html";
+                    }
+                    
+                    if(data.result == "true")
                         window.location = "validationDemande.html";
                     else
                         window.location = "refutDemande.html";
@@ -60,7 +64,6 @@ and open the template in the editor.
             }
 
             $(document).ready(function () {
-                document.getElementById('centerRect').style.backgroundColor = '#c7c2c2';
                 // ajout d'un "handler" sur le clic du bouton de connexion
                 $('#envoiDemandeAnimal').on('click', function () {
                     // affichage pour debugage dans la console javascript du navigateur

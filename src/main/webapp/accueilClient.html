@@ -74,6 +74,9 @@ and open the template in the editor.
                     },
                     dataType: 'json'
                 }).done(function (data) {
+                    if(data.pbConnexion == "true"){
+                        window.location = "problemeConnexion.html";
+                    }                                       
                     var client = data.client;
                     $('#nomClient').html("Bonjour " + client.nom + ",");
                     $('#adresseClient').html(client.adresse);

@@ -12,6 +12,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +46,16 @@ public class VueInformationsClient {
             jsonPersonne.addProperty("telephone", c.getTelephone());
             jsonPersonne.addProperty("mail", c.getMail());
             JsonArray jsonHistorique = new JsonArray();
-            for(Intervention i : Service.recupererHistoriqueIntervention(c))
+            List<Intervention> list = Service.recupererHistoriqueIntervention(c);
+
+            Collections.sort(list, new Comparator<Intervention>() {
+                @Override
+                public int compare(Intervention i1, Intervention i2) {
+                    return i1.getDateDebut().compareTo(i2.getDateDebut()) * -1;
+                };
+            });
+            
+            for(Intervention i : list)
             {
                 JsonObject jsonIntervention = new JsonObject();
                 jsonIntervention.addProperty("Type", i.getType());
@@ -83,6 +95,7 @@ public class VueInformationsClient {
             JsonObject container = new JsonObject();
             container.add("client", jsonPersonne);
             container.add("historique", jsonHistorique);
+            container.addProperty("pbConnexion", "false");
             out.println(gson.toJson(container));
             out.close();
         } catch (Exception ex) {
