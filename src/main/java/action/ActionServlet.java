@@ -6,6 +6,7 @@ package action;
  * and open the template in the editor.
  */
 
+import vue.VueValidationDemande;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -32,6 +33,7 @@ import modele.Livraison;
 import vue.VueInformationsClient;
 import vue.VueValidationConnexion;
 import vue.VueValidationInscription;
+import vue.VueValidationDemande;
 
 /**
  *
@@ -74,6 +76,11 @@ public class ActionServlet extends HttpServlet {
                 System.out.println(session.getAttribute("client"));
                 VueInformationsClient VIC = new VueInformationsClient();
                 VIC.informationsClient(request, response);
+            }else if(action.equals("demandeAnimal")){
+                ActionDemandeAnimal ADA = new ActionDemandeAnimal();
+                ADA.execute(request);
+                VueValidationDemande VVD = new VueValidationDemande();
+                VVD.validationDemande(request, response);
             }
         }
               
