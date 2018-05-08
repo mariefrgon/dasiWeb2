@@ -30,18 +30,17 @@ class ActionInscriptionClient {
         }
         
         if(GeoTest.getLatLng((request.getParameter("adresse")+ " " + request.getParameter("cp") + " " + request.getParameter("ville"))) == null){
-            System.out.println("ADRESSE INEXISTANTE !!!!!!!!!!!!!!!");
+            request.setAttribute("isRegistered", -1);
+        }else{
+            Client c = new Client(
+                    request.getParameter("civilite"), 
+                    request.getParameter("prenom"),
+                    request.getParameter("nom"),
+                    d, 
+                    request.getParameter("adresse")+ " " + request.getParameter("cp") + " " + request.getParameter("ville"),
+                    request.getParameter("tel"),
+                    request.getParameter("email"));
+            request.setAttribute("isRegistered", Service.inscriptionClient(c));
         }
-        
-        
-        Client c = new Client(
-                request.getParameter("civilite"), 
-                request.getParameter("prenom"),
-                request.getParameter("nom"),
-                d, 
-                request.getParameter("adresse")+ " " + request.getParameter("cp") + " " + request.getParameter("ville"),
-                request.getParameter("tel"),
-                request.getParameter("email"));
-        request.setAttribute("isRegistered", Service.inscriptionClient(c));
     }
 }

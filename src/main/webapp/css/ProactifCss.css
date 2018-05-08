@@ -10,6 +10,7 @@ and open the template in the editor.
 
 body{
     background-color: #d581a1;
+    overflow: hidden;
 }
 #pinkRect{
     background-color: #d581a1;

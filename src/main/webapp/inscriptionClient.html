@@ -30,7 +30,7 @@ and open the template in the editor.
                 <div class="form-row">
                     <div class="form-group col-md-1">
                         <label for="civilite">Civilité</label>
-                        <select id="civilite" class="form-control" name="civilite">
+                        <select id="civilite" class="form-control" name="civilite" required>
                             <option value="Mme">Mme</option>
                             <option value="M">M</option>
                             <option value="Dr">Dr</option>
@@ -38,45 +38,44 @@ and open the template in the editor.
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputNom">Nom</label>
-                        <input type="text" class="form-control" id="inputNom" placeholder="Nom">
+                        <input type="text" class="form-control" id="inputNom" placeholder="Nom" required onblur="verifInput(/^[a-z ,.'-]+$/i,'#inputNom')">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputPrenom">Prenom</label>
-                        <input type="text" class="form-control" id="inputPrenom" placeholder="Prenom">
+                        <input type="text" class="form-control" id="inputPrenom" placeholder="Prenom" required onblur="verifInput(/^[a-z ,.'-]+$/i,'#inputPrenom')">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputDateNaissance">Date de Naissance    <i class="far fa-calendar-alt fa-lg"></i></label>
-                        <input type="date" class="form-control" id="inputDateNaissance" placeholder="Date de Naissance">
+                        <input type="date" class="form-control" id="inputDateNaissance" placeholder="Date de Naissance" required onblur="verifDate()">
                     </div>
                 </div>
                 <div class="form-row">
                 <div class="form-group col-md-9">
                     <label for="inputAdresse">Adresse</label>
-                    <input type="text" class="form-control" id="inputAdresse" placeholder="Adresse">
+                    <input type="text" class="form-control" id="inputAdresse" placeholder="Adresse" required>
                 </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="inputVille">Ville</label>
-                        <input type="text" class="form-control" id="inputVille">
+                        <input type="text" class="form-control" id="inputVille" required onblur="verifInput(/^[a-z ,.'-]+$/i,'#inputVille')">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputCP">Code Postal</label>
-                        <input type="text" class="form-control" id="inputCP">
+                        <input type="text" class="form-control" id="inputCP" required onblur="verifInput(/^(0[1-9]{0,1}|[1-9][0-9]{0,1})[0-9]{0,3}$/,'#inputCP')">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="inputTel">Téléphone</label>
-                        <input type="tel" class="form-control" id="inputTel" placeholder="Téléphone">
+                        <input type="tel" class="form-control" id="inputTel" placeholder="Téléphone" required onblur="verifInput(/^[0-9]{10,10}$/,'#inputTel')">
                     </div>
                     <div class="form-group col-md-5">
                         <label for="inputEmail">E-mail</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Email" required onblur="verifInput(/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/,'#inputEmail')">
                     </div>
                 </div>
                 <div id="boutonDiv">
-                    
                     <button id="bouton-inscription-annuler" class="btn btn-dark btn-lg"><i class="fas fa-times-circle"></i>   Annuler</button>                    
                     <button id="bouton-inscription-valider" class="btn btn-light btn-lg"><i class="far fa-check-circle"></i>   Valider</button>
                 </div>
@@ -85,6 +84,26 @@ and open the template in the editor.
             </div>
         </div>
          <script>
+             function verifInput(regex,id)
+            {                    
+                if(!regex.test($(id).val()))
+                {
+                   $(id).attr("class","form-control is-invalid");
+                }
+                else{
+                    $(id).attr("class","form-control is-valid");
+                }
+             }
+             function verifDate()
+            {                    
+                if($('#inputDateNaissance').val() == "")
+                {
+                   $('#inputDateNaissance').attr("class","form-control is-invalid");
+                }
+                else{
+                    $('#inputDateNaissance').attr("class","form-control is-valid");
+                }
+             }
 
             function inscription() {
                 var civilite = $('#civilite').val();
@@ -114,7 +133,10 @@ and open the template in the editor.
                     },
                     dataType: 'json'
                 }).done(function (data) {
-                    if(data.result == "true")
+                    if(data.result == "-1"){
+                        $('#message').html("Adresse Inexistante : Votre adresse doit éxister pour que nos employés puissent intervenir.")
+                        $('#inputAdresse').attr("class","form-control is-invalid");
+                    }else if(data.result == "true")
                         window.location = "validationInscription.html";
                     else
                         $('#message').html('Echec de l\'inscription');
@@ -125,10 +147,14 @@ and open the template in the editor.
                 document.getElementById('centerRect').style.backgroundColor = '#c7c2c2';
                 // ajout d'un "handler" sur le clic du bouton de connexion
                 $('#bouton-inscription-valider').on('click', function () {
-                    // affichage pour debugage dans la console javascript du navigateur
                     console.log('Click sur le bouton "S\'inscrire"');
-                    // appel de la fonction connexion
-                    inscription();
+                    if($('#inputNom').attr("class").includes("is-valid") && $('#inputPrenom').attr("class").includes("is-valid")
+                            && $('#inputCP').attr("class").includes("is-valid") && $('#inputTel').attr("class").includes("is-valid")
+                            && $('#inputEmail').attr("class").includes("is-valid") && $('#inputVille').attr("class").includes("is-valid")
+                            && $('#inputDateNaissance').attr("class").includes("is-valid"))
+                        inscription();
+                    else
+                        $('#message').html('Veuillez remplir des champs correctes.');
                 });
             });
 

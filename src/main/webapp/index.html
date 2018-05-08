@@ -27,7 +27,7 @@ and open the template in the editor.
                     <div class="form-group mb-2" id="formconnexion">
                     <div id="champsconnexion">
                             <label class="inputLabel" for="champidclient">Numéro Client</label>
-                            <input class="form-control" name="idclient" id="champidclient" type="number">
+                            <input class="form-control" name="idclient" id="champidclient" type="number" onKeyPress="if (event.keyCode == 13) connexion()">
                         </div>
                         <button id="bouton-connexion" class="btn btn-light">OK ></button>
                     </div>
