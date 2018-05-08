@@ -260,3 +260,64 @@ h2{
 #centerRect-pbCo{
     text-align: center;
 }
+
+/* EMPLOYE CONNEXION */
+#blueRect{
+    background-color: #a4d9fe;
+    width: 30%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+    text-align: center;
+}
+#icon-users-employe{
+    position: absolute;
+    left: 20%;
+    top: 25%;
+    color: #88669f;
+}
+#icon-user-circle{
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    color: #294d8e;
+}
+/* ACCUEIL EMPLOYE */
+.bodyEmploye{
+    background-color: #a4d9fe;
+    overflow: hidden;    
+}
+#border-div{
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    height: 90%;
+    padding: 2%;
+}
+#div-text > h1 {
+    font-size: x-large;
+    font-weight: initial;
+}
+#description-intervention{
+    border: 2px solid #000;
+    height: 50%;
+    padding: 1%;
+}
+#titre-description{
+    margin-left: 1%;
+    width: -moz-fit-content;
+}
+.onglet{
+    position: absolute;
+    top: 4%;
+    background-color: white;
+    border-color: black;
+    border-width: 3px;
+}
+.onglet1{
+    left: 5%;
+}
+.onglet2{
+    left: 12%;
+}

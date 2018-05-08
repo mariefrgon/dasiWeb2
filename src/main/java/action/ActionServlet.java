@@ -35,6 +35,7 @@ import vue.VueValidationConnexion;
 import vue.VueValidationInscription;
 import vue.VueValidationDemande;
 import vue.VueProblemeConnexion;
+import vue.VueInformationEmploye;
 
 /**
  *
@@ -69,11 +70,21 @@ public class ActionServlet extends HttpServlet {
             AIC.execute(request);
             VueValidationInscription VVI = new VueValidationInscription();
             VVI.validationInscription(request, response);
+        }else if(action.equals("connecterEmploye")){
+            ActionConnexionEmploye ACE = new ActionConnexionEmploye();
+            ACE.execute(request);
+            VueValidationConnexion VVC = new VueValidationConnexion();
+            VVC.validationConnexion(request, response);
         }else{
-            if(session.getAttribute("client") == null){
+            if(session.getAttribute("client") == null && session.getAttribute("employe") == null){
                 System.out.println("VOUS NETES PAS CONNECTE");
                 VueProblemeConnexion VPC = new VueProblemeConnexion();
                 VPC.problemeConnexion(request, response);
+            }else if(action.equals("informationsEmploye")){
+                ActionInformationEmploye AIE = new ActionInformationEmploye();
+                AIE.execute(request);
+                VueInformationEmploye VIE = new VueInformationEmploye();
+                VIE.informationEmploye(request, response);
             }else if(action.equals("informationsClient") || action.equals("historiqueClient")){
                 System.out.println(session.getAttribute("client"));
                 VueInformationsClient VIC = new VueInformationsClient();
@@ -92,7 +103,7 @@ public class ActionServlet extends HttpServlet {
                 ActionDemandeLivraison ADI = new ActionDemandeLivraison();
                 ADI.execute(request);
                 VueValidationDemande VVD = new VueValidationDemande();
-               VVD.validationDemande(request, response);
+                VVD.validationDemande(request, response);
             }
         }
               

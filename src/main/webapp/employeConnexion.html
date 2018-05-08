@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Proact'IF Connexion Client</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/ProactifCss.css" type="text/css"/>
+        <link href="css/fontawesome-all.css" rel="stylesheet">
+        <script src="js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+    <body>
+        <div id="blueRect">
+            <i id="icon-user-circle" class="fas fa-user-circle fa-4x"></i>
+            <i id="icon-users-employe" class="fas fa-users fa-2x"></i>
+            <div id="innerPinkRect">
+                <h1>Proact'IF</h1>
+                <h2>Connexion Employe</h2>
+                <div class="form-inline">
+                    <div class="form-group mb-2" id="formconnexion">
+                    <div id="champsconnexion">
+                            <label class="inputLabel" for="champidclient">Numéro Employe</label>
+                            <input class="form-control" name="idemp" id="champidemp" type="number" onKeyPress="if (event.keyCode == 13) connexion()">
+                        </div>
+                        <button id="bouton-connexion" class="btn btn-light">OK ></button>
+                    </div>
+                </div>
+                <div id="message"></div>
+                <p>Entrez votre numéro employé.</p>
+            </div>
+        </div>
+        <script>
+
+            function connexion() {
+                var champLogin = $('#champidemp').val();
+
+                $('#message').html('Connexion en cours...');
+
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        action: 'connecterEmploye',
+                        login: champLogin
+                    },
+                    dataType: 'json'
+                }).done(function (data) {
+                    if(data.result == '1')
+                        window.location = "accueilEmploye.html";
+                    else
+                        $('#message').html('Echec de la connexion');
+                });
+            }
+
+            $(document).ready(function () {
+                document.body.style.backgroundColor = "white";
+                // ajout d'un "handler" sur le clic du bouton de connexion
+                $('#bouton-connexion').on('click', function () {
+                    // affichage pour debugage dans la console javascript du navigateur
+                    console.log('Click sur le bouton "Se Connecter"');
+                    // appel de la fonction connexion
+                    connexion();
+                });
+            });
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Proact'IF</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/ProactifCss.css" type="text/css"/>
+        <link href="css/fontawesome-all.css" rel="stylesheet">
+        <script src="js/bootstrap.min.js"></script>
+    </head>
+    <body class="bodyEmploye">
+        <header>
+            <a class="btn onglet onglet1" href="accueilEmploye.html" role="button">Principal</a>
+            <a class="btn onglet onglet2" href="carteInterventions.html" role="button">Carte des Interventions</a>
+            <h1>Proact'IF</h1>
+        </header>
+        <div class="centerRect" id="centerRect">
+            <h1 id="nomEmploye"></h1>
+            <div id="border-div">
+                <div class="form-row" id="div-top">
+                    <div class="form-group col-md-11" id="div-text">
+                        <h1></h1>
+                        <i></i>
+                        <p></p>
+                    </div>
+                    <div class="form-group col-md-1" id="icon-intervention-employe">
+                        
+                    </div>
+                </div>
+                <fieldset id="description-intervention" >
+                    <legend id="titre-description">Description</legend>
+                    <div></div>
+                </fieldset>
+                <a class="btn btn-success btn-lg bouton-basDroite" href="cloturerIntervention.html" role="button"><i class="fas fa-hand-paper icon-dans-bouton"></i>Cloturer l'intervention</a>
+            </div>
+        </div>
+        <script>
+
+            $(document).ready(function () {
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        action: 'informationsEmploye'
+                    },
+                    dataType: 'json'
+                }).done(function (data) {
+                    console.log(data);
+                    if(data.pbConnexion == "true"){
+                        window.location = "problemeConnexion.html";
+                    }                                       
+                    var employe = data.employe;
+                    $('#nomEmploye').html("Bonjour " + employe.prenom);
+                    var textH1 = "";
+                    var objet = "";
+                    var entreprise = "";
+                    var animal ="";
+                    if(data.intervention.Type == "Livraison"){                            
+                        document.getElementById('icon-intervention-employe').innerHTML = '<i class="fas fa-paper-plane fa-4x "></i>';
+                        textH1 = "Livraison pour " + data.intervention.prenomClient + " " + data.intervention.nomClient;
+                        entreprise = data.intervention.entreprise;
+                        objet = data.intervention.objet;
+                    }else if (data.intervention.Type == "Animal"){                            
+                        document.getElementById('icon-intervention-employe').innerHTML = '<i class="fas fa-paper-plane fa-4x "></i>';
+                        textH1 = "Intervention Animale pour " + data.intervention.prenomClient + " " + data.intervention.nomClient;
+                        animal = data.intervention.animal;
+                    }else if (data.intervention.Type == "Incident"){                            
+                        document.getElementById('icon-intervention-employe').innerHTML = '<i class="fas fa-paper-plane fa-4x "></i>';
+                        textH1 = "Intervention Incident pour " + data.intervention.prenomClient + " " + data.intervention.nomClient;
+                    }
+                    var textp = "Demande effectuée à " + data.intervention.heureDebut + " le " + data.intervention.dateDebut;
+                    $('#div-text > h1').html(textH1);
+                    $('#div-text > i').html("Demande effectuée à " + data.intervention.heureDebut + " le " + data.intervention.dateDebut);
+                    $('#div-text > p').html("Adresse : " + data.intervention.adresseClient);
+                    if(data.intervention.Type == "Livraison"){
+                        var pObjet = $('<p />');
+                        pObjet.html("Objet à livrer : " + objet);
+                        var pEntreprise = $('<p />');
+                        pEntreprise.html("Entreprise de livraison : " + entreprise);
+                        $('#div-text').append(pObjet,pEntreprise);
+                    }else if (data.intervention.Type == "Animal"){
+                        var pAnimal = $('<p />');
+                        pAnimal.html("Animal concerné : " + animal);
+                        $('#div-text').append(pAnimal);
+                    }
+                    $('#description-intervention > div').html(data.intervention.description);
+                    
+                });
+            });
+
+        </script>
+    </body>
+</html>
