@@ -36,6 +36,8 @@ import vue.VueValidationInscription;
 import vue.VueValidationDemande;
 import vue.VueProblemeConnexion;
 import vue.VueInformationEmploye;
+import vue.VueValidationCloture;
+import vue.VueCarteIntervention;
 
 /**
  *
@@ -80,26 +82,35 @@ public class ActionServlet extends HttpServlet {
                 System.out.println("VOUS NETES PAS CONNECTE");
                 VueProblemeConnexion VPC = new VueProblemeConnexion();
                 VPC.problemeConnexion(request, response);
-            }else if(action.equals("informationsEmploye")){
+            }else if(action.equals("informationsEmploye") && session.getAttribute("employe") != null){
                 ActionInformationEmploye AIE = new ActionInformationEmploye();
                 AIE.execute(request);
                 VueInformationEmploye VIE = new VueInformationEmploye();
                 VIE.informationEmploye(request, response);
-            }else if(action.equals("informationsClient") || action.equals("historiqueClient")){
-                System.out.println(session.getAttribute("client"));
+            }else if(action.equals("cloturerIntervention") && session.getAttribute("employe") != null){
+                ActionClotureIntervention ACI = new ActionClotureIntervention();
+                ACI.execute(request);
+                VueValidationCloture VVC = new VueValidationCloture();
+                VVC.validationCloture(request, response);
+            }else if(action.equals("carteIntervention") && session.getAttribute("employe") != null){
+                ActionCarteIntervention ACI = new ActionCarteIntervention();
+                ACI.execute(request);
+                VueCarteIntervention VCI = new VueCarteIntervention();
+                VCI.carteIntervention(request, response);
+            }else if((action.equals("informationsClient") || action.equals("historiqueClient")) && session.getAttribute("client") != null){
                 VueInformationsClient VIC = new VueInformationsClient();
                 VIC.informationsClient(request, response);
-            }else if(action.equals("demandeAnimal")){
+            }else if(action.equals("demandeAnimal") && session.getAttribute("client") != null){
                 ActionDemandeAnimal ADA = new ActionDemandeAnimal();
                 ADA.execute(request);
                 VueValidationDemande VVD = new VueValidationDemande();
                 VVD.validationDemande(request, response);
-            }else if(action.equals("demandeIncident")){
+            }else if(action.equals("demandeIncident") && session.getAttribute("client") != null){
                 ActionDemandeIncident ADI = new ActionDemandeIncident();
                 ADI.execute(request);
                 VueValidationDemande VVD = new VueValidationDemande();
                 VVD.validationDemande(request, response);
-            }else if(action.equals("demandeLivraison")){
+            }else if(action.equals("demandeLivraison") && session.getAttribute("client") != null){
                 ActionDemandeLivraison ADI = new ActionDemandeLivraison();
                 ADI.execute(request);
                 VueValidationDemande VVD = new VueValidationDemande();

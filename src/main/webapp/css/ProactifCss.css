@@ -321,3 +321,18 @@ h2{
 .onglet2{
     left: 12%;
 }
+.div-pasIntervention{
+    text-align: center;
+    margin-top: 15%;
+}
+
+/* CLOTURER INTERVENTION */
+#commentaire-intervention{
+    border: 2px solid #000;
+    height: 50%;
+    padding: 1%;
+}
+#titre-commentaire{
+    margin-left: 1%;
+    width: -moz-fit-content;
+} 

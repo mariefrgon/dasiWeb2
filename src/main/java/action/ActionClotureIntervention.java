@@ -6,7 +6,6 @@
 package action;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import modele.Employe;
 import modele.Intervention;
 import services.Service;
@@ -15,12 +14,14 @@ import services.Service;
  *
  * @author Emilie Borghino
  */
-class ActionInformationEmploye {
+class ActionClotureIntervention {
 
     void execute(HttpServletRequest request) {
         Employe e = (Employe) request.getSession().getAttribute("employe");
-        Intervention i = Service.rechercheInterventionEnCoursEmploye(e);
-        request.getSession().setAttribute("intervention", i);
+        boolean probleme = false;
+        if(request.getParameter("probleme").equals("true"))
+            probleme = true;
+        request.setAttribute("isCloture", Service.cloturerIntervention((Intervention) request.getSession().getAttribute("intervention"), probleme, request.getParameter("commentaire")));
     }
     
 }

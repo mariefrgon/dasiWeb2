@@ -15,6 +15,20 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/ProactifCss.css" type="text/css"/>
         <link href="css/fontawesome-all.css" rel="stylesheet">
         <script src="js/bootstrap.min.js"></script>
+            <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
     </head>
     <body class="bodyEmploye">
         <header>
@@ -23,24 +37,37 @@ and open the template in the editor.
             <h1>Proact'IF</h1>
         </header>
         <div class="centerRect" id="centerRect">
-            <h1 id="nomEmploye"></h1>
-            <div id="border-div">
-                <div class="form-row" id="div-top">
-                    <div class="form-group col-md-11" id="div-text">
-                        <h1></h1>
-                        <i></i>
-                        <p></p>
-                    </div>
-                    <div class="form-group col-md-1" id="icon-intervention-employe">
-                        
-                    </div>
-                </div>
-                <fieldset id="description-intervention" >
-                    <legend id="titre-description">Description</legend>
-                    <div></div>
-                </fieldset>
-                <a class="btn btn-success btn-lg bouton-basDroite" href="cloturerIntervention.html" role="button"><i class="fas fa-hand-paper icon-dans-bouton"></i>Cloturer l'intervention</a>
-            </div>
+            <div id="map"></div>
+            <script>
+              var map;
+              function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                  center: {lat: 45.782825, lng: 4.877777},
+                  zoom: 8
+                });      var script = document.createElement('script');
+                // This example uses a local copy of the GeoJSON stored at
+                // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+                script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
+                document.getElementsByTagName('head')[0].appendChild(script);
+              }
+
+              // Loop through the results array and place a marker for each
+              // set of coordinates.
+              window.eqfeed_callback = function(results) {
+                for (var i = 0; i < results.features.length; i++) {
+                  var coords = results.features[i].geometry.coordinates;
+                  var latLng = new google.maps.LatLng(coords[1],coords[0]);
+                  var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map
+                  });
+                }
+              }
+
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcVVJjfmxsNdbdUYeg9MjQoJJ6THPuap4&callback=initMap"
+            async defer></script>
+
         </div>
         <script>
 
@@ -49,14 +76,14 @@ and open the template in the editor.
                     url: './ActionServlet',
                     method: 'POST',
                     data: {
-                        action: 'informationsEmploye'
+                        action: 'carteIntervention'
                     },
                     dataType: 'json'
                 }).done(function (data) {
                     console.log(data);
                     if(data.pbConnexion == "true"){
                         window.location = "problemeConnexionEmploye.html";
-                    }                                       
+                    } /*                                      
                     var employe = data.employe;
                     $('#nomEmploye').html("Bonjour " + employe.prenom);
                     if(data.intervention == null){
@@ -99,7 +126,7 @@ and open the template in the editor.
                             $('#div-text').append(pAnimal);
                         }
                         $('#description-intervention > div').html(data.intervention.description);
-                    }
+                    }*/
                 });
             });
 

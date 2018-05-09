@@ -5,8 +5,8 @@
  */
 package action;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import modele.Employe;
 import modele.Intervention;
 import services.Service;
@@ -15,12 +15,12 @@ import services.Service;
  *
  * @author Emilie Borghino
  */
-class ActionInformationEmploye {
+class ActionCarteIntervention {
 
     void execute(HttpServletRequest request) {
-        Employe e = (Employe) request.getSession().getAttribute("employe");
-        Intervention i = Service.rechercheInterventionEnCoursEmploye(e);
-        request.getSession().setAttribute("intervention", i);
+        List<Intervention> i = Service.rechercheInterventionDuJour();
+        request.setAttribute("interventions", i);
+        System.out.println(request.getAttribute("interventions"));
     }
     
 }
