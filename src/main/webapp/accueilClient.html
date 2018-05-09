@@ -78,7 +78,7 @@ and open the template in the editor.
                         window.location = "problemeConnexion.html";
                     }                                       
                     var client = data.client;
-                    $('#nomClient').html("Bonjour " + client.nom + ",");
+                    $('#nomClient').html("Bonjour " + client.prenom + ",");
                     $('#adresseClient').html(client.adresse);
                     var cpt = 0;
                     for(intervention in data.historique)

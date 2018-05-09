@@ -82,8 +82,10 @@ public class VueInformationsClient {
                     jsonIntervention.addProperty("dateFin","null");
                     jsonIntervention.addProperty("heureFin", "null");
                 }else{
+                    formatter = new SimpleDateFormat("dd/MM/yyyy");
                     formattedDate = formatter.format(i.getDateFin());
                     jsonIntervention.addProperty("dateFin", formattedDate);
+                    formatter = new SimpleDateFormat("HH:mm");
                     formattedHour = formatter.format(i.getDateFin());
                     jsonIntervention.addProperty("heureFin", formattedHour);
                 }

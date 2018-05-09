@@ -38,38 +38,81 @@ and open the template in the editor.
         </header>
         <div class="centerRect" id="centerRect">
             <div id="map"></div>
-            <script>
+        </div>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcVVJjfmxsNdbdUYeg9MjQoJJ6THPuap4&callback=initMap"
+            async defer></script>
+        <script>
+
               var map;
               function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                   center: {lat: 45.782825, lng: 4.877777},
                   zoom: 8
-                });      var script = document.createElement('script');
+                });      /*var script = document.createElement('script');
                 // This example uses a local copy of the GeoJSON stored at
                 // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
                 script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-                document.getElementsByTagName('head')[0].appendChild(script);
+                document.getElementsByTagName('head')[0].appendChild(script);*/
               }
 
               // Loop through the results array and place a marker for each
               // set of coordinates.
-              window.eqfeed_callback = function(results) {
-                for (var i = 0; i < results.features.length; i++) {
-                  var coords = results.features[i].geometry.coordinates;
-                  var latLng = new google.maps.LatLng(coords[1],coords[0]);
+              function generatedMarkers(list) {
+                for (var i = 0; i < list.length; i++) {
+                  console.log(list[i].LatLong);
+                  console.log(list[i].LatLong.substr(0,list[i].LatLong.indexOf(',')));
+                  console.log(list[i].LatLong.substr(list[i].LatLong.indexOf(',')+1));
+                  var latLng = new google.maps.LatLng(list[i].LatLong.substr(0,list[i].LatLong.indexOf(',')),list[i].LatLong.substr(list[i].LatLong.indexOf(',')+1));
                   var marker = new google.maps.Marker({
                     position: latLng,
                     map: map
                   });
+                  if(list[i].heureFin == "null")
+                         var contentString = '<div id="content">'+
+                        '<div id="siteNotice">'+
+                        '</div>'+
+                        '<div id="bodyContent">'+
+                        '<p>' + list[i].Type + " " + list[i].ClientPrenom[0] +"."+list[i].ClientNom + '</p><p>'  +
+                        list[i].heureDebut + " " + list[i].dateDebut + '</p>' +
+                        '<p> En attente de ' + list[i].EmployePrenom + "." + list[i].EmployeNom[0] +'</p>' +
+                        '</div>'+
+                        '</div>';
+                  else if(list[i].heureFin != "null" && list[i].probleme != false)
+                      var contentString = '<div id="content">'+
+                        '<div id="siteNotice">'+
+                        '</div>'+
+                        '<div id="bodyContent">'+
+                        '<p>' + list[i].Type + " " + list[i].ClientPrenom[0] +"."+list[i].ClientNom + '</p><p>'  +
+                        list[i].heureDebut + " " + list[i].dateDebut + '</p>' +
+                        '<p> Réalisé par ' + list[i].EmployePrenom + "." + list[i].EmployeNom[0] + '</p><p>' +
+                        ' le ' + list[i].dateFin + ' à ' + list[i].heureFin +'</p>' +
+                        '<p> Un problème est survenu </p>' +
+                        '</div>'+
+                        '</div>';
+                  else 
+                      var contentString = '<div id="content">'+
+                        '<div id="siteNotice">'+
+                        '</div>'+
+                        '<div id="bodyContent">'+
+                        '<p>' + list[i].Type + " " + list[i].ClientPrenom[0] +"."+list[i].ClientNom + '</p><p>'  +
+                        list[i].heureDebut + " " + list[i].dateDebut + '</p>' +
+                        '<p> Réalisé par ' + list[i].EmployePrenom + "." + list[i].EmployeNom[0] + '</p><p>' +
+                        ' le ' + list[i].dateFin + ' à ' + list[i].heureFin +'</p>' +
+                        '<p> Rien à signaler </p>' +
+                        '</div>'+
+                        '</div>';
+                
+                    var infowindow = new google.maps.InfoWindow();
+
+                    google.maps.event.addListener(marker,'click', (function(marker,contentString,infowindow){ 
+                        return function() {
+                            infowindow.setContent(contentString);
+                            infowindow.open(map,marker);
+                        };
+                    })(marker,contentString,infowindow)); 
+
                 }
               }
-
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcVVJjfmxsNdbdUYeg9MjQoJJ6THPuap4&callback=initMap"
-            async defer></script>
-
-        </div>
-        <script>
 
             $(document).ready(function () {
                 $.ajax({
@@ -80,10 +123,12 @@ and open the template in the editor.
                     },
                     dataType: 'json'
                 }).done(function (data) {
+                    var results = data.list;
                     console.log(data);
                     if(data.pbConnexion == "true"){
                         window.location = "problemeConnexionEmploye.html";
-                    } /*                                      
+                    } 
+                    generatedMarkers(data.list);/*                                      
                     var employe = data.employe;
                     $('#nomEmploye').html("Bonjour " + employe.prenom);
                     if(data.intervention == null){

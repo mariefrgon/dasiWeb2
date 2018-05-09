@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import modele.Animal;
 import modele.Intervention;
 import modele.Livraison;
+import fr.insalyon.dasi.proactifb3328.util.GeoTest;
 
 /**
  *
@@ -52,6 +53,7 @@ public class VueCarteIntervention {
                 jsonIntervention.addProperty("ClientPrenom", i.getClient().getPrenom());
                 jsonIntervention.addProperty("ClientNom", i.getClient().getNom());
                 jsonIntervention.addProperty("adresse", i.getClient().getAdresse());
+                jsonIntervention.addProperty("LatLong", GeoTest.getLatLng(i.getClient().getAdresse()).toString());
                 jsonIntervention.addProperty("description", i.getDescription());
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 String formattedDate = formatter.format(i.getDateDebut());
@@ -63,8 +65,10 @@ public class VueCarteIntervention {
                     jsonIntervention.addProperty("dateFin","null");
                     jsonIntervention.addProperty("heureFin", "null");
                 }else{
+                    formatter = new SimpleDateFormat("dd/MM/yyyy");
                     formattedDate = formatter.format(i.getDateFin());
                     jsonIntervention.addProperty("dateFin", formattedDate);
+                    formatter = new SimpleDateFormat("HH:mm");
                     formattedHour = formatter.format(i.getDateFin());
                     jsonIntervention.addProperty("heureFin", formattedHour);
                 }

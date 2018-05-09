@@ -28,7 +28,6 @@ class ActionInscriptionClient {
         } catch (ParseException ex) {
             Logger.getLogger(ActionInscriptionClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         if(GeoTest.getLatLng((request.getParameter("adresse")+ " " + request.getParameter("cp") + " " + request.getParameter("ville"))) == null){
             request.setAttribute("isRegistered", -1);
         }else{
