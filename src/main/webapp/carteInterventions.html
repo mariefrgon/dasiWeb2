@@ -54,63 +54,71 @@ and open the template in the editor.
                 script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
                 document.getElementsByTagName('head')[0].appendChild(script);*/
               }
+              
+              function setInfoEndNull(obj,string){
+                   string += 
+                        '<p>' + obj.Type + " " + obj.ClientPrenom[0] +"."+obj.ClientNom + '</p><p>'  +
+                        obj.heureDebut + " " + obj.dateDebut + '</p>' +
+                        '<p> En attente de ' + obj.EmployePrenom + "." + obj.EmployeNom[0] +'</p>';
+                  return string;
+              }
+              
+              function setInfoPb(obj,string){
+                   string += 
+                        '<p>' + obj.Type + " " + obj.ClientPrenom[0] +"."+ obj.ClientNom + '</p><p>'  +
+                        obj.heureDebut + " " + obj.dateDebut + '</p>' +
+                        '<p> Réalisé par ' + obj.EmployePrenom + "." + obj.EmployeNom[0] + '</p><p>' +
+                        ' le ' + obj.dateFin + ' à ' + obj.heureFin +'</p>' +
+                        '<p> Un problème est survenu </p>';
+                  return string;
+              }
+              function setInfoPasPb(obj,string){
+                   string += 
+                        '<p>' + obj.Type + " " + obj.ClientPrenom[0] +"."+ obj.ClientNom + '</p><p>'  +
+                        obj.heureDebut + " " + obj.dateDebut + '</p>' +
+                        '<p> Réalisé par ' + obj.EmployePrenom + "." + obj.EmployeNom[0] + '</p><p>' +
+                        ' le ' + obj.dateFin + ' à ' + obj.heureFin +'</p>' +
+                        '<p> Rien à signaler </p>';
+                  return string;
+              }
 
               // Loop through the results array and place a marker for each
               // set of coordinates.
               function generatedMarkers(list) {
+                var markers = [];
+                var infoswindows = [];
                 for (var i = 0; i < list.length; i++) {
-                  console.log(list[i].LatLong);
-                  console.log(list[i].LatLong.substr(0,list[i].LatLong.indexOf(',')));
-                  console.log(list[i].LatLong.substr(list[i].LatLong.indexOf(',')+1));
                   var latLng = new google.maps.LatLng(list[i].LatLong.substr(0,list[i].LatLong.indexOf(',')),list[i].LatLong.substr(list[i].LatLong.indexOf(',')+1));
+                  var string = '<div id="content" style="height: 200px;">'+
+                        '<div id="bodyContent">';
+                  for (var i = 0 ; i < markers.length ; i++){
+                    if(latLng.equals(markers[i].getPosition())){
+                        string = infoswindows[i] + '<p>-------------------------------</p>';
+                    }                       
+                  }
                   var marker = new google.maps.Marker({
                     position: latLng,
                     map: map
                   });
                   if(list[i].heureFin == "null")
-                         var contentString = '<div id="content">'+
-                        '<div id="siteNotice">'+
-                        '</div>'+
-                        '<div id="bodyContent">'+
-                        '<p>' + list[i].Type + " " + list[i].ClientPrenom[0] +"."+list[i].ClientNom + '</p><p>'  +
-                        list[i].heureDebut + " " + list[i].dateDebut + '</p>' +
-                        '<p> En attente de ' + list[i].EmployePrenom + "." + list[i].EmployeNom[0] +'</p>' +
-                        '</div>'+
-                        '</div>';
+                    var contentString = setInfoEndNull(list[i],string);
                   else if(list[i].heureFin != "null" && list[i].probleme != false)
-                      var contentString = '<div id="content">'+
-                        '<div id="siteNotice">'+
-                        '</div>'+
-                        '<div id="bodyContent">'+
-                        '<p>' + list[i].Type + " " + list[i].ClientPrenom[0] +"."+list[i].ClientNom + '</p><p>'  +
-                        list[i].heureDebut + " " + list[i].dateDebut + '</p>' +
-                        '<p> Réalisé par ' + list[i].EmployePrenom + "." + list[i].EmployeNom[0] + '</p><p>' +
-                        ' le ' + list[i].dateFin + ' à ' + list[i].heureFin +'</p>' +
-                        '<p> Un problème est survenu </p>' +
-                        '</div>'+
-                        '</div>';
+                      var contentString = setInfoPb(list[i],string);
                   else 
-                      var contentString = '<div id="content">'+
-                        '<div id="siteNotice">'+
-                        '</div>'+
-                        '<div id="bodyContent">'+
-                        '<p>' + list[i].Type + " " + list[i].ClientPrenom[0] +"."+list[i].ClientNom + '</p><p>'  +
-                        list[i].heureDebut + " " + list[i].dateDebut + '</p>' +
-                        '<p> Réalisé par ' + list[i].EmployePrenom + "." + list[i].EmployeNom[0] + '</p><p>' +
-                        ' le ' + list[i].dateFin + ' à ' + list[i].heureFin +'</p>' +
-                        '<p> Rien à signaler </p>' +
+                      var contentString = setInfoPasPb(list[i],string);
+                
+                    infoswindows.push(contentString);
+                    contentString += 
                         '</div>'+
                         '</div>';
-                
                     var infowindow = new google.maps.InfoWindow();
-
                     google.maps.event.addListener(marker,'click', (function(marker,contentString,infowindow){ 
                         return function() {
                             infowindow.setContent(contentString);
                             infowindow.open(map,marker);
                         };
                     })(marker,contentString,infowindow)); 
-
+                    markers.push(marker);
                 }
               }
 
@@ -124,54 +132,10 @@ and open the template in the editor.
                     dataType: 'json'
                 }).done(function (data) {
                     var results = data.list;
-                    console.log(data);
                     if(data.pbConnexion == "true"){
                         window.location = "problemeConnexionEmploye.html";
                     } 
-                    generatedMarkers(data.list);/*                                      
-                    var employe = data.employe;
-                    $('#nomEmploye').html("Bonjour " + employe.prenom);
-                    if(data.intervention == null){
-                        $('#border-div').remove();
-                        var divMessage = $('<div />').attr("class","div-pasIntervention");
-                        var pMessage = $('<p />').html("Vous n'avez aucune intervention en cours, revenez plus tard !");
-                        divMessage.append(pMessage);
-                        $('#centerRect').append(divMessage);
-                    }else{
-                        var textH1 = "";
-                        var objet = "";
-                        var entreprise = "";
-                        var animal ="";
-                        if(data.intervention.Type == "Livraison"){                            
-                            document.getElementById('icon-intervention-employe').innerHTML = '<i class="fas fa-paper-plane fa-4x "></i>';
-                            textH1 = "Livraison pour " + data.intervention.prenomClient + " " + data.intervention.nomClient;
-                            entreprise = data.intervention.entreprise;
-                            objet = data.intervention.objet;
-                        }else if (data.intervention.Type == "Animal"){                            
-                            document.getElementById('icon-intervention-employe').innerHTML = '<i class="fas fa-paw fa-4x "></i>';
-                            textH1 = "Intervention Animale pour " + data.intervention.prenomClient + " " + data.intervention.nomClient;
-                            animal = data.intervention.animal;
-                        }else if (data.intervention.Type == "Incident"){                            
-                            document.getElementById('icon-intervention-employe').innerHTML = '<i class="fas fa-exclamation-triangle fa-4x "></i>';
-                            textH1 = "Intervention Incident pour " + data.intervention.prenomClient + " " + data.intervention.nomClient;
-                        }
-                        var textp = "Demande effectuée à " + data.intervention.heureDebut + " le " + data.intervention.dateDebut;
-                        $('#div-text > h1').html(textH1);
-                        $('#div-text > i').html("Demande effectuée à " + data.intervention.heureDebut + " le " + data.intervention.dateDebut);
-                        $('#div-text > p').html("Adresse : " + data.intervention.adresseClient);
-                        if(data.intervention.Type == "Livraison"){
-                            var pObjet = $('<p />');
-                            pObjet.html("Objet à livrer : " + objet);
-                            var pEntreprise = $('<p />');
-                            pEntreprise.html("Entreprise de livraison : " + entreprise);
-                            $('#div-text').append(pObjet,pEntreprise);
-                        }else if (data.intervention.Type == "Animal"){
-                            var pAnimal = $('<p />');
-                            pAnimal.html("Animal concerné : " + animal);
-                            $('#div-text').append(pAnimal);
-                        }
-                        $('#description-intervention > div').html(data.intervention.description);
-                    }*/
+                    generatedMarkers(data.list);
                 });
             });
 
