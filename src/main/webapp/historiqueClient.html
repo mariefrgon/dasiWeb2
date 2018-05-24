@@ -60,20 +60,32 @@ and open the template in the editor.
                         
                         if(data.historique[intervention].Type == "Livraison"){
                             var icon = $('<i />').attr('class','fas fa-paper-plane fa-4x');
-                            pFirstLine.html('Livraison, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
-                            var iSecondLineVal = 'exécutée par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0];
+                            pFirstLine.html('Livraison, demandée à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            if(data.historique[intervention].heureFin == "null"){
+                                var iSecondLineVal = 'En attente de '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0];
+                            }else{
+                                var iSecondLineVal = 'exécutée par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]+', à '+ data.historique[intervention].heureFin +' le '+ data.historique[intervention].dateFin;
+                            }
                             var entreprise = $('<p />').html('Entreprise : ' + data.historique[intervention].entreprise);
                             var objet = $('<p />').html('Objet : ' + data.historique[intervention].objet);
                         }
                         else if(data.historique[intervention].Type == "Incident"){  
                             var icon = $('<i />').attr('class','fas fa-exclamation-triangle fa-4x');
-                            pFirstLine.html('Livraison, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
-                            var iSecondLineVal = 'exécuté par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0];               
+                            pFirstLine.html('Incident, demandé à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            if(data.historique[intervention].heureFin == "null"){
+                                var iSecondLineVal = 'En attente de '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0];
+                            }else{
+                                var iSecondLineVal = 'exécutée par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]+', à '+ data.historique[intervention].heureFin +' le '+ data.historique[intervention].dateFin;
+                            }
                         }
                         else if(data.historique[intervention].Type == "Animal"){
                             var icon = $('<i />').attr('class','fas fa-paw fa-4x');
-                            pFirstLine.html('Livraison, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
-                            var iSecondLineVal = 'exécuté par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0];                                             
+                            pFirstLine.html('Animal, demandé à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            if(data.historique[intervention].heureFin == "null"){
+                                var iSecondLineVal = 'En attente de '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0];
+                            }else{
+                                var iSecondLineVal = 'exécutée par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]+', à '+ data.historique[intervention].heureFin +' le '+ data.historique[intervention].dateFin;
+                            }                                   
                             var animal = $('<p />').html('Animal : ' + data.historique[intervention].animal);
                         }
                         divIcon.append(icon);

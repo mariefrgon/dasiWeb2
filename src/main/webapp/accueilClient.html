@@ -86,18 +86,30 @@ and open the template in the editor.
                         cpt++;
                         if(data.historique[intervention].Type == "Livraison"){                            
                             document.getElementById('icon-intervention-'+cpt).innerHTML = '<i class="fas fa-paper-plane fa-4x "></i>';
-                            $('#text-intervention-'+cpt+' > p').html('Livraison, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
-                            $('#text-intervention-'+cpt+' > i').html('exécutée par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
+                            $('#text-intervention-'+cpt+' > p').html('Livraison, demandée à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            if(data.historique[intervention].heureFin == "null"){
+                                $('#text-intervention-'+cpt+' > i').html('En attente de '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
+                            }else{
+                                $('#text-intervention-'+cpt+' > i').html('exécutée par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]+', à '+ data.historique[intervention].heureFin +' le '+ data.historique[intervention].dateFin);
+                            }
                         }
                         else if(data.historique[intervention].Type == "Incident"){                            
                             document.getElementById('icon-intervention-'+cpt).innerHTML = '<i class="fas fa-exclamation-triangle fa-4x "></i>';
-                            $('#text-intervention-'+cpt+' > p').html('Incident, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
-                            $('#text-intervention-'+cpt+' > i').html('exécuté par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
+                            $('#text-intervention-'+cpt+' > p').html('Incident, demandé à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            if(data.historique[intervention].heureFin == "null"){
+                                $('#text-intervention-'+cpt+' > i').html('En attente de '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
+                            }else{
+                                $('#text-intervention-'+cpt+' > i').html('exécutée par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]+', à '+ data.historique[intervention].heureFin +' le '+ data.historique[intervention].dateFin);
+                            }
                         }
                         else if(data.historique[intervention].Type == "Animal"){                            
                             document.getElementById('icon-intervention-'+cpt).innerHTML = '<i class="fas fa-paw fa-4x"></i>';
-                            $('#text-intervention-'+cpt+' > p').html('Animal, à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
-                            $('#text-intervention-'+cpt+' > i').html('exécuté par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
+                            $('#text-intervention-'+cpt+' > p').html('Animal, demandé à '+ data.historique[intervention].heureDebut +' le '+ data.historique[intervention].dateDebut +',');
+                            if(data.historique[intervention].heureFin == "null"){
+                                $('#text-intervention-'+cpt+' > i').html('En attente de '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]);
+                            }else{
+                                $('#text-intervention-'+cpt+' > i').html('exécutée par '+data.historique[intervention].EmployePrenom+'.'+data.historique[intervention].EmployeNom[0]+', à '+ data.historique[intervention].heureFin +' le '+ data.historique[intervention].dateFin);
+                            }
                         }
                     }
                 });
